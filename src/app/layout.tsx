@@ -12,8 +12,12 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Matrix Social Media App",
-  description: "A social media app connects people, enabling communication, content sharing, networking, and community building.",
+  title: {
+    default: "Matrix Social Media App",
+    template: "Matrix | %s",
+  },
+  description:
+    "A social media app connects people, enabling communication, content sharing, networking, and community building.",
 };
 
 export default function RootLayout({

@@ -5,6 +5,7 @@ import prisma from "@/lib/prisma";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
 import { hash } from "@node-rs/argon2";
 import { generateIdFromEntropySize } from "lucia";
+import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -19,14 +20,6 @@ export async function signUp(
       outputLen: 32,
       parallelism: 1,
     });
-    const userId = generateIdFromEntropySize(10);
-    const session = await lucia.createSession(userId, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
     const existingUsername = await prisma.user.findFirst({
       where: {
         username: {
@@ -55,6 +48,15 @@ export async function signUp(
       };
     }
 
+    const userId = generateIdFromEntropySize(10);
+    const session = await lucia.createSession(userId, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+
     await prisma.user.create({
       data: {
         id: userId,
@@ -67,6 +69,7 @@ export async function signUp(
 
     return redirect("/");
   } catch (err) {
+    if (isRedirectError(err)) throw err;
     console.error(err);
     return {
       error: "Something Went Wrong, Please Try Again.",
