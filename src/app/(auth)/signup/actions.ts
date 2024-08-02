@@ -3,23 +3,27 @@
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
-import { hash } from "@node-rs/argon2";
 import { generateIdFromEntropySize } from "lucia";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { hash } from "@node-rs/argon2";
 
 export async function signUp(
   credentials: SignUpValues
 ): Promise<{ error: string }> {
   try {
     const { username, email, password } = signUpSchema.parse(credentials);
+
     const passwordHash = await hash(password, {
       memoryCost: 19456,
       timeCost: 2,
       outputLen: 32,
       parallelism: 1,
     });
+
+    const userId = generateIdFromEntropySize(10);
+
     const existingUsername = await prisma.user.findFirst({
       where: {
         username: {
@@ -28,6 +32,13 @@ export async function signUp(
         },
       },
     });
+
+    if (existingUsername) {
+      return {
+        error: "Username already taken",
+      };
+    }
+
     const existingEmail = await prisma.user.findFirst({
       where: {
         email: {
@@ -37,25 +48,11 @@ export async function signUp(
       },
     });
 
-    if (existingUsername) {
-      return {
-        error: "This username already taken!",
-      };
-    }
     if (existingEmail) {
       return {
-        error: "This email already taken!",
+        error: "Email already taken",
       };
     }
-
-    const userId = generateIdFromEntropySize(10);
-    const session = await lucia.createSession(userId, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
 
     await prisma.user.create({
       data: {
@@ -67,12 +64,20 @@ export async function signUp(
       },
     });
 
+    const session = await lucia.createSession(userId, {});
+    const sessionCookie = lucia.createSessionCookie(session.id);
+    cookies().set(
+      sessionCookie.name,
+      sessionCookie.value,
+      sessionCookie.attributes
+    );
+
     return redirect("/");
-  } catch (err) {
-    if (isRedirectError(err)) throw err;
-    console.error(err);
+  } catch (error) {
+    if (isRedirectError(error)) throw error;
+    console.error(error);
     return {
-      error: "Something Went Wrong, Please Try Again.",
+      error: "Something went wrong. Please try again.",
     };
   }
 }
