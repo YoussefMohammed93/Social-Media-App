@@ -21,7 +21,7 @@ export default function SearchField() {
         <Input
           name="q"
           placeholder="Search"
-          className="pe-1 focus:pe-10 transition-all duration-500"
+          className="pe-3 sm:focus:pe-10 transition-all duration-500"
         />
         <SearchIcon className="absolute right-3 top-1/2 size-5 -translate-y-1/2 transform text-muted-foreground" />
       </div>
