@@ -50,7 +50,11 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="Username" {...field} className="transition-all duration-500"/>
+                <Input
+                  placeholder="Username"
+                  {...field}
+                  className="transition-all duration-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,7 +67,12 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Email" type="email" {...field} className="transition-all duration-500"/>
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  {...field}
+                  className="transition-all duration-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -76,16 +85,20 @@ export default function SignUpForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <PasswordInput placeholder="Password" {...field} className="transition-all duration-500"/>
+                <PasswordInput
+                  placeholder="Password"
+                  {...field}
+                  className="transition-all duration-500"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="pt-8">
-        <LoadingButton loading={isPending} type="submit" className="w-full">
-          Create account
-        </LoadingButton>
+          <LoadingButton loading={isPending} type="submit" className="w-full">
+            Create account
+          </LoadingButton>
         </div>
       </form>
     </Form>
