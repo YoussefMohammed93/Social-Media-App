@@ -1,7 +1,7 @@
-import loginImage from "@/assets/login.jpg";
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import loginImage from "@/assets/login.jpg";
 import LoginForm from "./logInForm";
 import GoogleBtn from "./google/googleBtn";
 
@@ -42,7 +42,7 @@ export default function Page() {
           src={loginImage}
           alt="Log In"
           className="hidden md:block w-1/2 object-fill"
-          style={{borderLeft: "1px solid #e2e8f0"}}
+          style={{ borderLeft: "1px solid #e2e8f0" }}
         />
       </div>
     </main>
