@@ -1,22 +1,28 @@
-import PostEditor from "@/components/posts/editor/postEditor";
-import Post from "@/components/posts/post";
-import TrendsSideBar from "@/components/trendsSideBar";
-import prisma from "@/lib/prisma";
-import { postDataInclude } from "@/lib/types";
 import ForYouFeed from "./forYouFeed";
+import FollowingFeed from "./followingFeed";
+import TrendsSidebar from "@/components/trendsSideBar";
+import PostEditor from "@/components/posts/editor/postEditor";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default async function Home() {
-  const posts = await prisma.post.findMany({
-    include: postDataInclude,
-    orderBy: { createdAt: "desc" },
-  });
+export default function Home() {
   return (
     <main className="flex w-full min-w-0 gap-5">
       <div className="w-full min-w-0 space-y-5">
         <PostEditor />
-        <ForYouFeed />
+        <Tabs defaultValue="for-you">
+          <TabsList className="mb-3">
+            <TabsTrigger value="for-you">For you</TabsTrigger>
+            <TabsTrigger value="following">Following</TabsTrigger>
+          </TabsList>
+          <TabsContent value="for-you">
+            <ForYouFeed />
+          </TabsContent>
+          <TabsContent value="following">
+            <FollowingFeed />
+          </TabsContent>
+        </Tabs>
       </div>
-      <TrendsSideBar />
+      <TrendsSidebar />
     </main>
   );
 }
