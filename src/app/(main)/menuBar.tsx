@@ -8,7 +8,7 @@ interface MenuBarProps {
 
 export default function MenuBar({ className }: MenuBarProps) {
   return (
-    <div className={className} >
+    <div className={className}>
       <Button
         variant="ghost"
         className="flex items-center justify-start gap-3"

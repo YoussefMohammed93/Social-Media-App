@@ -104,12 +104,6 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
           </div>
           <div>Member since {formatDate(user.createdAt, "MMM d, yyyy")}</div>
           <div className="flex items-center gap-3">
-            <span>
-              Posts:{" "}
-              <span className="font-semibold">
-                {formatNumber(user._count.posts)}
-              </span>
-            </span>
             <FollowerCount userId={user.id} initialState={followerInfo} />
           </div>
         </div>
