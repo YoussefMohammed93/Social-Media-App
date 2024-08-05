@@ -71,3 +71,16 @@
 body {
   scroll-behavior: smooth;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #16a34a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #148e41;
+}

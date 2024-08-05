@@ -9,6 +9,7 @@ import { formatNumber } from "@/lib/utils";
 import { unstable_cache } from "next/cache";
 import { getUserDataSelect } from "@/lib/types";
 import UserTooltip from "./userTooltip";
+import TrendingInfo from "./trendingInfo";
 
 export default function TrendsSidebar() {
   return (
@@ -103,7 +104,12 @@ async function TrendingTopics() {
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm border">
-      <div className="text-xl font-bold">Trending topics</div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold">Trending topics</h2>
+        <div>
+          <TrendingInfo />
+        </div>
+      </div>
       {trendingTopics.map(({ hashtag, count }) => {
         const title = hashtag.split("#")[1];
 
