@@ -1,8 +1,11 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
+import localFont from "next/font/local";
+import { extractRouterConfig } from "uploadthing/server";
+import { fileRouter } from "./api/uploadthing/core";
+import "./globals.css";
 import ReactQueryProvider from "./reactQueryProvider";
 
 const geistSans = localFont({
@@ -16,8 +19,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: {
+    template: "%s | Matbook",
     default: "Matbook",
-    template: "Matbook | %s",
   },
   description:
     "A social media app connects people, enabling communication, content sharing, networking, and community building.",
@@ -31,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"

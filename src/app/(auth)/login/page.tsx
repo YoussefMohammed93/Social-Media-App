@@ -18,7 +18,7 @@ export default function Page() {
       >
         <div className="w-full md:w-1/2 space-y-10 overflow-y-auto p-5">
           <h1 className="text-center text-2xl sm:text-3xl font-bold">
-            Log In To Matrix App
+            Login to matbook 
           </h1>
           <div className="space-y-5">
             <GoogleBtn />

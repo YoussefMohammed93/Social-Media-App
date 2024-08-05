@@ -38,7 +38,7 @@ export function useDeletePostMutation() {
       );
 
       toast({
-        description: "Post deleted",
+        description: "Your post has been successfully deleted!",
       });
 
       if (pathname === `/posts/${deletedPost.id}`) {

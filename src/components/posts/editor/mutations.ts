@@ -60,7 +60,7 @@ export function useSubmitPostMutation() {
       });
 
       toast({
-        description: "Post created",
+        description: "Your post has been published successfully!",
       });
     },
     onError(error) {

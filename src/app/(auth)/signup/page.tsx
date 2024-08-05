@@ -18,7 +18,7 @@ export default function Page() {
         <div className="w-full md:w-1/2 space-y-10 overflow-y-auto p-5">
           <div className="text-center space-y-1">
             <h1 className="text-2xl sm:text-3xl font-bold">
-              Sign Up To Matrix App
+              Signup to matbook
             </h1>
             <p className="text-muted-foreground pt-3">
               A place where even <span className="italic">you</span> can find a
