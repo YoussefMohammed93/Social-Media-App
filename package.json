@@ -45,7 +45,7 @@
     "react-linkify-it": "^1.0.8",
     "react-toastify": "^10.0.5",
     "stream-chat": "^8.37.0",
-    "stream-chat-react": "^11.23.3",
+    "stream-chat-react": "^11.23.4",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.13.2",

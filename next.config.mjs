@@ -9,11 +9,19 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "utfs.io",
         protocol: "https",
+        hostname: "utfs.io",
         pathname: `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/*`,
       },
     ],
+  },
+  rewrites: () => {
+    return [
+      {
+        source: "/hashtag/:tag",
+        destination: "/search?q=%23:tag",
+      },
+    ];
   },
 };
 

@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import loginImage from "@/assets/login.jpg";
 import LoginForm from "./logInForm";
-import GoogleBtn from "./google/googleBtn";
 
 export const metadata: Metadata = {
   title: "Log In",
@@ -18,15 +17,9 @@ export default function Page() {
       >
         <div className="w-full md:w-1/2 space-y-10 overflow-y-auto p-5">
           <h1 className="text-center text-2xl sm:text-3xl font-bold">
-            Login to matbook 
+            Login to matbook
           </h1>
-          <div className="space-y-5">
-            <GoogleBtn />
-            <div className="flex items-center gap-3">
-              <div className="h-px flex-1 bg-muted" />
-              <span>OR</span>
-              <div className="h-px flex-1 bg-muted" />
-            </div>
+          <div className="space-y-5 pt-16">
             <div>
               <LoginForm />
               <Link
